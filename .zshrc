@@ -43,6 +43,7 @@ fi
 source $HOME/.antigen.zsh
 
 antigen use oh-my-zsh
+antigen bundle git
 antigen bundle DarrinTisdale/zsh-aliases-exa
 antigen bundle z
 antigen bundle psprint/zsh-navigation-tools
