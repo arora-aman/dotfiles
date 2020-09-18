@@ -16,20 +16,12 @@ prepend_path $HOME/usr/bin
 prepend_path $HOME/usr/local/bin
 prepend_path $HOME/.local/bin
 
-#
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -64,9 +56,18 @@ antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle zsh-users/zsh-history-substring-search
 
 antigen theme romkatv/powerlevel10k
-# antigen theme sporty_256
 
 antigen apply
+
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
+bindkey '^[[5D' beginning-of-line
+bindkey '^[[5C' end-of-line
+bindkey '^[[3~' delete-char
+bindkey '^?' backward-delete-char
+bindkey "^A" vi-beginning-of-line
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 setopt NO_BG_NICE
 setopt NO_HUP
@@ -86,6 +87,10 @@ setopt HIST_IGNORE_ALL_DUPS
 
 setopt COMPLETE_ALIASES
 
+alias vim=nvim
+alias reload!='source ~/.zshrc'
+alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
+
 if [[ "$(uname)" == "Linux" ]]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew";
     export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
@@ -95,8 +100,6 @@ if [[ "$(uname)" == "Linux" ]]; then
     export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}";
 fi
-
-alias vim=nvim
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
