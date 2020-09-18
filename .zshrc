@@ -5,6 +5,18 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+if [[ -d $DOTFILES/zsh/functions ]]; then
+    for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
+fi
+
+prepend_path /usr/local/sbin
+prepend_path $DOTFILES/bin
+prepend_path $HOME/bin
+prepend_path $HOME/usr/bin
+prepend_path $HOME/usr/local/bin
+prepend_path $HOME/.local/bin
+
+#
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
@@ -55,13 +67,6 @@ antigen theme romkatv/powerlevel10k
 # antigen theme sporty_256
 
 antigen apply
-
-if [ -d "$HOME/Library/Python/3.6/bin/" ] ; then
-    PATH="$HOME/Library/Python/3.6/bin/:$PATH"
-fi
-export PATH=$HOME/usr/bin:$HOME/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$DOTFILES/bin:$PATH
 
 setopt NO_BG_NICE
 setopt NO_HUP
