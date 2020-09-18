@@ -114,7 +114,7 @@ export ZPLUGDIR="$CACHEDIR/zsh/plugins"
 typeset -A plugins
 
 zfetch $ZPLUGDIR zsh-users/zsh-syntax-highlighting
-zfetch $ZPLUGDIR zsh-users/zsh-autosuggestions
+zfetch $ZPLUGDIR marlonrichert/zsh-autocomplete #zsh-users/zsh-autosuggestions
 zfetch $ZPLUGDIR chriskempson/base16-shell
 zfetch $ZPLUGDIR Aloxaf/fzf-tab
 
@@ -202,9 +202,6 @@ alias grep='grep --color=auto'
 alias df='df -h' # disk free, in Gigabytes, not bytes
 alias du='du -h -c' # calculate disk usage for a folder
 
-# Applications
-alias ios='open -a /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app'
-
 # Hide/show all desktop icons (useful when presenting)
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
@@ -225,6 +222,3 @@ alias tat='tmux attach -t'
 alias tns='tmux new-session -s'
 
 alias lpath='echo $PATH | tr ":" "\n"' # list the PATH separated by new lines
-
-# list our process using port
-alias wtfport="lsof -i -P -n | grep LISTEN"
