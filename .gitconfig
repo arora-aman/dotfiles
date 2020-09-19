@@ -1,0 +1,38 @@
+[user]
+	name = Aman Arora
+	email = me@aman-arora.com
+
+[core]
+	editor = vim
+    pager = diff-so-fancy | less --tabs=4 -RFX
+    # pager = delta # enable for side-by-side
+
+[diff]
+    colorMoved = default
+
+[pull]
+	rebase = true
+
+[github]
+	user = arora-aman
+
+[credential]
+	helper = cache --timeout 3600
+
+[diff-so-fancy]
+	markEmptyLines = false
+	changeHunkIndicators = false
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+	side-by-side = true
+    line-numbers=true
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
