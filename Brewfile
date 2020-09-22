@@ -39,6 +39,7 @@ brew "markdown"
 brew "neofetch"
 brew "tcl-tk" # Required for neovim
 brew "neovim"
+brew "npm" # Need for coc-vim
 brew "python"
 brew "ripgrep"
 brew "shellcheck"
