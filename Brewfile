@@ -6,12 +6,6 @@ if OS.mac?
     brew "mas"
     brew "noti"
     brew "trash"
-
-    # Fonts
-    cask "font-fira-code"
-    cask "font-jetbrains-mono"
-    cask "font-cascadia-mono"
-    cask "font-3270-nerd-font"
 end
 
 tap "homebrew/bundle"
