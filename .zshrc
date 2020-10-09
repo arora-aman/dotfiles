@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 if [[ -d $DOTFILES/zsh/functions ]]; then
     for func in $DOTFILES/zsh/functions/*(:t); autoload -U $func
 fi
@@ -15,6 +8,11 @@ prepend_path $HOME/bin
 prepend_path $HOME/usr/bin
 prepend_path $HOME/usr/local/bin
 prepend_path $HOME/.local/bin
+prepend_path $HOME/.cargo/bin
+
+if [[ "$(uname)" == "Linux" ]]; then
+    export LD_LIBRARY_PATH=usr/lib/x86_64-linux-gnu
+fi
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
@@ -50,14 +48,19 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle DarrinTisdale/zsh-aliases-exa
 antigen bundle z
+antigen bundle mafredri/zsh-async
 antigen bundle psprint/zsh-navigation-tools
-antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-history-substring-search
 
-antigen theme romkatv/powerlevel10k
+antigen bundle chrissicool/zsh-256color
+antigen bundle sindresorhus/pure
+
+#zstyle :prompt:pure:path color white
+zstyle :prompt:pure:git:branch:cached color default
+zstyle :prompt:pure:git:branch color green
 
 antigen apply
+
 
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
@@ -85,7 +88,6 @@ setopt HIST_REDUCE_BLANKS
 setopt SHARE_HISTORY
 setopt HIST_IGNORE_ALL_DUPS
 
-setopt COMPLETE_ALIASES
 
 alias vim=nvim
 alias reload!='source ~/.zshrc'
@@ -99,6 +101,8 @@ if [[ "$(uname)" == "Linux" ]]; then
     prepend_path "$HOMEBREW_PREFIX/sbin"
     export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
     export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH}";
+
+    eval $($HOME/.linuxbrew/bin/brew shellenv)
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
